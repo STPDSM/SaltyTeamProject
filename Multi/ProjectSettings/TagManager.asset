@@ -14,8 +14,8 @@ TagManager:
   - 
   - 
   - LocalPlayer
-  - remoteLayer
-  - 
+  - remotePlayer
+  - DontDraw
   - 
   - 
   - 

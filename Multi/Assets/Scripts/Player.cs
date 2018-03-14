@@ -4,13 +4,14 @@ using System.Collections;
 
 public class Player : NetworkBehaviour {
 
+    [SyncVar]
     private bool _isDead = false;
     public bool isDead
     {
         get { return _isDead; }
         protected set { _isDead = value; }
     }
-
+     
     [SerializeField]
     private int maxHealth = 100;
 
@@ -19,12 +20,13 @@ public class Player : NetworkBehaviour {
 
     [SerializeField]
     private Behaviour[] disableOnDeath;
+    [SerializeField]
     private bool[] wasEnabled;
 
     public void Setup()
     {
         wasEnabled = new bool[disableOnDeath.Length];
-        for(int i = 0; i < wasEnabled.Length ;i++)
+        for(int i = 0; i < disableOnDeath.Length && i < wasEnabled.Length; i++)
         {
             wasEnabled[i] = disableOnDeath[i].enabled;
         }
@@ -79,9 +81,9 @@ public class Player : NetworkBehaviour {
     {
         yield return new WaitForSeconds(gameManager.instance.MatchSettings.respawnTime);
         SetDefaults();
-        Transform _startPoint = NetworkManager.singleton.GetStartPosition();
-        transform.position = _startPoint.position;
-        transform.rotation = _startPoint.rotation;
+        Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
+        transform.position = _spawnPoint.position;
+        transform.rotation = _spawnPoint.rotation;
 
         Debug.Log(transform.name + " respawned.");
     }
@@ -91,12 +93,12 @@ public class Player : NetworkBehaviour {
         isDead = false;
 
         currenHealth = maxHealth;
-        for (int i = 0; i < disableOnDeath.Length; i++)
+        for (int i = 0; i < disableOnDeath.Length && i<wasEnabled.Length; i++)
         {
             disableOnDeath[i].enabled = wasEnabled[i];
         }
 
-        Collider _col = GetComponent<Collider>(); ;
+        Collider _col = GetComponent<Collider>(); 
         if (_col != null)
             _col.enabled = true;
     }

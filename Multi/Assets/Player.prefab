@@ -229,7 +229,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294966271
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -379,6 +379,7 @@ MonoBehaviour:
   disableOnDeath:
   - {fileID: 114203377238896774}
   - {fileID: 114844909157608056}
+  wasEnabled: 
 --- !u!114 &114203377238896774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -393,7 +394,6 @@ MonoBehaviour:
   speed: 5
   LookSensitivity: 3
   thrusterForce: 1500
-  jointMode: 1
   jointSpring: 20
   jointMaxForce: 40
 --- !u!114 &114360682067804312
@@ -504,7 +504,11 @@ MonoBehaviour:
   - {fileID: 20329904162464816}
   - {fileID: 81889562147276394}
   - {fileID: 114844909157608056}
-  remoteLayerName: remoteLayer
+  remoteLayerName: remotePlayer
+  dontDrawLayername: DontDraw
+  playerGraphics: {fileID: 1781645525173846}
+  playerUIPrefab: {fileID: 1355923158871814, guid: d6974be389d5d2a45b1484f4f189c736,
+    type: 2}
 --- !u!114 &114878225349298314
 MonoBehaviour:
   m_ObjectHideFlags: 1
